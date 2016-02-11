@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function main {
+  local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
+  source "$shome/script/profile"
+  
+  rsync -ia "$shome/." --exclude .git .
+  (set +f; rm -f bin/minimal* exec/minimal*)
+  git add .
+  git grep TODO
+}
+
+source sub "$BASH_SOURCE" "$@"
