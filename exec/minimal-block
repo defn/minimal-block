@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-  local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
+  local shome="${_minimal_block_home:-"$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"}"
   source "$shome/script/profile"
   
   rsync -ia "$shome/." --exclude .git .
